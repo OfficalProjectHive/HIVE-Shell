@@ -18,16 +18,18 @@ build Version BETA 0.0.1
 # Current Commands
 ```bash
 case $commandInput in
-  help | Help)  help;;
-  clear) clear ;;
-  exit | quit | close) echo "Exiting HIVE..."; sleep 2; echo "Thanks for using HIVE"; echo "Made By Wave Demure"; exit ;;
-  changename | namechange) newName ;;
-  whoami | username) printName ;;
-  buildshim | createshim) buildShim ;; # NOT WORKING
-  about) aboutCommand ;;
-  list | ls) ls ;;
-  cd) changeDir ;;
-  exec) execute;;
-  *) echo "$commandInput Is an Unknown Command";;
-esac
+            help | Help)  help;;
+            clear) clear ;;
+            exit | quit | close) echo "Exiting HIVE..."; sleep 2; echo "Thanks for using HIVE"; echo "Made By Wave Demure"; exit ;;
+            changename | namechange) newName ;;
+            whoami | username) printName ;;
+            buildshim | createshim) creatingshim ;;
+            about) aboutCommand ;;
+            list | ls) ls ;;
+            cd) changeDir ;;
+            exec) execute;;
+            echo*) echonew ;;
+            *) echo "$commandInput Is an Unknown Command";;
+        esac
+
 ```
