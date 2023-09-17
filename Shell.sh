@@ -10,7 +10,7 @@
     echo "[]                                                    []"
     echo "[]              Creating Directorys...                []"
     echo "[]                                                    []"
-    echo "[]                Build. Pre 0.0.1                    []"
+    echo "[]                Build. BETA 0.0.1                   []"
     echo "[]====================================================[]"
    
     if test -d NewShell; then
@@ -41,7 +41,7 @@
             echo "[]                                                    []"
             echo "[]               Getting User Info...                 []"
             echo "[]                                                    []"
-            echo "[]                Build. Pre 0.0.1                    []"
+            echo "[]                Build. BETA 0.0.1                   []"
             echo "[]====================================================[]"
         # True Check
             read -p "Enter Your Username> " userCheck
@@ -57,7 +57,7 @@
             echo "[]                                                    []"
             echo "[]                Entering Shell...                   []"
             echo "[]                                                    []"
-            echo "[]                Build. Pre 0.0.1                    []"
+            echo "[]                Build. BETA 0.0.1                   []"
             echo "[]====================================================[]"
         # Dropping    
         sleep 1
