@@ -1,3 +1,1 @@
-<h1 align=center>
-    HIVE-Shell
-</h1>
+<h1 align="center">HIVE-Shell</h1>
