@@ -3,7 +3,7 @@
 # What Does this do
   This is a project we made to not only learn more bash<br>
   but to also a project to hold all of our shell scripts in in<br>
-**Very Unstable** State At the moment
+**Very Unstable** At the moment
 
 # Usage
 
