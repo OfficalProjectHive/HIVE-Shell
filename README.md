@@ -1,1 +1,3 @@
-# HIVE-Shell
+<div align=center>
+    HIVE-Shell
+</div>
