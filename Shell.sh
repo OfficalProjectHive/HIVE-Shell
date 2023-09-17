@@ -4,15 +4,15 @@
     user=
     helpShown=
 
-    echo "[]====================================================[]"
-    echo "[]               Welcome to HIVE Shell                []"
-    echo "[]                                                    []"
-    echo "[]       A Sub-Shell Developed By Wave Demure         []"
-    echo "[]                                                    []"
-    echo "[]              Creating Directorys...                []"
-    echo "[]                                                    []"
-    echo "[]                Build. BETA 0.0.2                   []"
-    echo "[]====================================================[]"
+    echo "[*]====================================================[*]"
+    echo "[*]               Welcome to HIVE Shell                [*]"
+    echo "[*]                                                    [*]"
+    echo "[*]       A Sub-Shell Developed By Wave Demure         [*]"
+    echo "[*]                                                    [*]"
+    echo "[*]              Creating Directorys...                [*]"
+    echo "[*]                                                    [*]"
+    echo "[*]                Build. BETA 0.0.2                   [*]"
+    echo "[*]====================================================[*]"
    
     if test -d NewShell; then
         echo
@@ -35,15 +35,15 @@ sleep 1
 
             # Reprint
             clear
-            echo "[]====================================================[]"
-            echo "[]                    HIVE Shell                      []"
-            echo "[]                                                    []"
-            echo "[]       A Sub-Shell Developed By Wave Demure         []"
-            echo "[]                                                    []"
-            echo "[]               Getting User Info...                 []"
-            echo "[]                                                    []"
-            echo "[]                Build. BETA 0.0.2                   []"
-            echo "[]====================================================[]"
+            echo "[*]====================================================[*]"
+            echo "[*]                    HIVE Shell                      [*]"
+            echo "[*]                                                    [*]"
+            echo "[*]       A Sub-Shell Developed By Wave Demure         [*]"
+            echo "[*]                                                    [*]"
+            echo "[*]               Getting User Info...                 [*]"
+            echo "[*]                                                    [*]"
+            echo "[*]                Build. BETA 0.0.2                   [*]"
+            echo "[*]====================================================[*]"
         # True Check
             read -p "Enter Your Username> " userCheck
             user=$userCheck
@@ -51,15 +51,15 @@ sleep 1
 
             #Reprint
             clear
-            echo "[]====================================================[]"
-            echo "[]                    HIVE Shell                      []"
-            echo "[]                                                    []"
-            echo "[]       A Sub-Shell Developed By Wave Demure         []"
-            echo "[]                                                    []"
-            echo "[]                Entering Shell...                   []"
-            echo "[]                                                    []"
-            echo "[]                Build. BETA 0.0.2                   []"
-            echo "[]====================================================[]"
+            echo "[*]====================================================[*]"
+            echo "[*]                    HIVE Shell                      [*]"
+            echo "[*]                                                    [*]"
+            echo "[*]       A Sub-Shell Developed By Wave Demure         [*]"
+            echo "[*]                                                    [*]"
+            echo "[*]                Entering Shell...                   [*]"
+            echo "[*]                                                    [*]"
+            echo "[*]                Build. BETA 0.0.2                   [*]"
+            echo "[*]====================================================[*]"
         # Dropping    
         sleep 1
         clear
@@ -78,7 +78,7 @@ sleep 1
             echo "buildshim - Opens the HIVE Shim Builder"
         }
         helpText() {
-            echo "Welcome to the HIVE Shell $user"
+            echo "Welcome to the HIVE Shell, $user"
             echo
             echo "Type Help for Command List"
             echo
@@ -120,6 +120,44 @@ sleep 1
             else
                 echo "Not a file lol"
             fi
+        }
+        checkpack() {
+            isGit=$(which git)
+            isWget=$(which wget)
+            isCgpt=$(which cgpt)
+
+            if [[ $isGit != "" ]]; then
+                echo "Git is installed"
+            fi
+
+            if [[ $isWget != "" ]]; then
+                echo "wget is installed"
+            fi
+
+            if [[ $isCgpt != "" ]]; then
+                echo "cgpt is installed"
+            fi
+
+
+            if [[ $isCgpt != "" && $isGit != "" && $isWget != "" ]]; then
+                echo "All Packages Installed"
+            else
+                echo "You need to install"
+                if [[ $isGit == "" ]]; then
+                    echo "Git"
+                fi
+
+                if [[ $isWget == "" ]]; then
+                    echo "wget"
+                fi
+
+                if [[ $isCgpt == "" ]]; then
+                    echo "cgpt"
+                fi
+            fi
+        }
+        creatingshim() {
+            exec shelltools/builder.sh
         }
         echonew() {
             removecho=("echo")
