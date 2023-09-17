@@ -12,3 +12,5 @@
   cd HIVE-Shell
   sudo bash Shell.sh
 ```
+
+build Version BETA 0.0.1
