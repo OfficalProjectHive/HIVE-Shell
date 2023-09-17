@@ -23,7 +23,7 @@ case $commandInput in
   exit | quit | close) echo "Exiting HIVE..."; sleep 2; echo "Thanks for using HIVE"; echo "Made By Wave Demure"; exit ;;
   changename | namechange) newName ;;
   whoami | username) printName ;;
-  buildshim | createshim) buildShim ;;
+  buildshim | createshim) buildShim ;; # NOT WORKING
   about) aboutCommand ;;
   list | ls) ls ;;
   cd) changeDir ;;
