@@ -1,4 +1,5 @@
     cur=$(pwd)
+    directorymaybe=$cur
     crosDir=$cur/CrosItems
     user=
     helpShown=
@@ -10,7 +11,7 @@
     echo "[]                                                    []"
     echo "[]              Creating Directorys...                []"
     echo "[]                                                    []"
-    echo "[]                Build. BETA 0.0.1                   []"
+    echo "[]                Build. BETA 0.0.2                   []"
     echo "[]====================================================[]"
    
     if test -d NewShell; then
@@ -26,7 +27,7 @@
     else
         mkdir CrosItems
     fi
-
+sleep 1
 
 
     # Stuffs
@@ -41,7 +42,7 @@
             echo "[]                                                    []"
             echo "[]               Getting User Info...                 []"
             echo "[]                                                    []"
-            echo "[]                Build. BETA 0.0.1                   []"
+            echo "[]                Build. BETA 0.0.2                   []"
             echo "[]====================================================[]"
         # True Check
             read -p "Enter Your Username> " userCheck
@@ -51,13 +52,13 @@
             #Reprint
             clear
             echo "[]====================================================[]"
-            echo "[]                   HIVE Shell                       []"
+            echo "[]                    HIVE Shell                      []"
             echo "[]                                                    []"
             echo "[]       A Sub-Shell Developed By Wave Demure         []"
             echo "[]                                                    []"
             echo "[]                Entering Shell...                   []"
             echo "[]                                                    []"
-            echo "[]                Build. BETA 0.0.1                   []"
+            echo "[]                Build. BETA 0.0.2                   []"
             echo "[]====================================================[]"
         # Dropping    
         sleep 1
@@ -65,6 +66,7 @@
     # yea
   
     shell() {
+
         help() {
             echo "These are the commands that you can use"
             echo "help  -  Shows a Help Screen"
@@ -81,19 +83,12 @@
             echo "Type Help for Command List"
             echo
             echo "Or type exit to close"
+            echo
         }
         newName() {
             echo -n "Enter Your new username> "
             read NewUserName
             user=$NewUserName
-        }
-        resetShell() {
-           echo "Getting File location"
-           sleep 1
-           echo
-           pathtroll=$(find . -iname FakeShell.sh)
-           sleep 1
-           exec $pathtroll
         }
         printName() {
             echo $user
@@ -101,109 +96,59 @@
             echo "You can change the name by running the command changename"
         }
         buildShim() {
-            cd CrosItems
-            clear
-            echo "[]====================================================[]"
-            echo "[]                 HIVE Shim Builder                  []"
-            echo "[]                                                    []"
-            echo "[]          An all in one sh1mmer builder             []"
-            echo "[]                                                    []"
-            echo "[]              Enter your board below                []"
-            echo "[]                 To get started                     []"
-            echo "[]====================================================[]"
-            read -p "[Input Board]> " board
-
-            echo "Grabbing Packages"
-
-            isGit=$(which git)
-            isWget=$(which wget)
-            isCgpt=$(which cgpt)
-
-            if [[ $isGit != "" ]]; then
-                echo "Git is installed"
-            fi
-
-            if [[ $isWget != "" ]]; then
-                echo "wget is installed"
-            fi
-
-            if [[ $isCgpt != "" ]]; then
-                echo "cgpt is installed"
-            fi
-
-
-            if [[ $isCgpt != "" && $isGit != "" && $isWget != "" ]]; then
-                echo "All Packages Installed"
-            else
-                echo "You need to install"
-                if [[ $isGit == "" ]]; then
-                    echo "Git"
-                fi
-
-                if [[ $isWget == "" ]]; then
-                    echo "wget"
-                fi
-
-                if [[ $isCgpt == "" ]]; then
-                    echo "cgpt"
-                fi
-                read -p "Press Enter to Continue"
-                return
-            fi
-
-            if test -d $board; then
-                echo "Found $board Dir"
-            else
-                echo "Creating"
-                mkdir $board
-            fi
-
-            cd $board
-            if test -e index.html?path=%2F$board.zip; then
-                echo "Found $board Zip"
-            else
-                echo "Did not Find $board Zip"
-                echo "Downloading..."
-                wget -q https://dl.osu.bio/api/raw/?path=/$board.zip
-
-                if [ $? -ne 0 ]; then
-                    echo "No Board Found"
-                    sleep 3
-                    return
-                fi
-            fi
-
-            unzip index.html?path=%2F$board.zip
-
-            rm -f index.html?path=%2F$board.zip
-
-            if [[ $board == "hana" || $board == "coral" ]]; then
-                echo "legacy detected"
-                echo "legacy not supported yet"
-                sleep 5
-                return
-            else
-                git clone https://github.com/ProjectChrome/sh1mmer
-                cd sh1mmer/wax
-                wget https://dl.sh1mmer.me/build-tools/chromebrew/chromebrew-dev.tar.gz
-                sudo bash wax.sh $board.bin --dev
-            fi
-
-            ShimLocation=$(find . -iname $board.bin)
-            echo "Your Shim is located at $ShimLocation"
+           echo "womp womp"
         }
         aboutCommand() {
             echo "HIVE Sub-Shell"
             echo ""
-            echo "Current Build Pre 0.0.1"
             echo "Made By Wave Demure"
             echo ""
+            echo "Current Build BETA 0.0.2"
+        }
+        changeDir() {
+            read -p "Input Directory > " directorymaybe
+            if test -d $directorymaybe; then
+                cd $directorymaybe
+            else
+                echo "Thats not a Directory"
+            fi
+        }
+        execute() {
+            read -p "Input File Location > " executeCommand
+            if test -e $executeCommand; then
+                ./$executeCommand
+            else
+                echo "Not a file lol"
+            fi
+        }
+        echonew() {
+            removecho=("echo")
+
+            remove_word() (
+                set -f
+                IFS=' '
+
+                s=$1
+                w=$2
+
+                set -- $1
+                for arg do
+                    shift
+                    [ "$arg" = "$w" ] && continue
+                    set -- "$@" "$arg"
+                done
+
+                printf '%s\n' "$*"
+            )
+
+            remove_word "$commandInput" "$removecho"
+
         }
         if [[ $helpShown == "" ]]; then
             helpText
             helpShown="sil"
         fi
-        echo -n -e "\033[0;31m$user\033[0m@\033[0;31mHIVE\033[0m>\033[0m "
+        echo -n -e "\033[0;31m$user\033[0m@\033[0;31mHIVE\033[0m ~ \033[0;32m$directorymaybe\033[0m >\033[0m "
         read commandInput
 
         # Send Command Trough Check
@@ -213,13 +158,16 @@
             clear) clear ;;
             exit | quit | close) echo "Exiting HIVE..."; sleep 2; echo "Thanks for using HIVE"; echo "Made By Wave Demure"; exit ;;
             changename | namechange) newName ;;
-            resetshell | reset | reload) resetShell ;;
             whoami | username) printName ;;
             buildshim | createshim) buildShim ;;
-            about) aboutCommand;;
+            about) aboutCommand ;;
+            list | ls) ls ;;
+            cd) changeDir ;;
+            exec) execute;;
+            echo*) echonew ;;
             *) echo "$commandInput Is an Unknown Command";;
         esac
 
         shell
     }
-    shell
+    shell   
