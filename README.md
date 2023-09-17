@@ -7,3 +7,8 @@
 
 # Usage
 
+```bash
+  git clone https://github.com/ProjectChrome/HIVE-Shell
+  cd HIVE-Shell
+  sudo bash Shell.sh
+```
