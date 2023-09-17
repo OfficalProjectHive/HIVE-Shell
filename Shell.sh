@@ -216,6 +216,7 @@
             resetshell | reset | reload) resetShell ;;
             whoami | username) printName ;;
             buildshim | createshim) buildShim ;;
+            about) aboutCommand;;
             *) echo "$commandInput Is an Unknown Command";;
         esac
 
