@@ -1,8 +1,10 @@
     cur=$(pwd)
+    homedir=$cur
     directorymaybe=$cur
     crosDir=$cur/CrosItems
     user=
     helpShown=
+    flushhelpshown=
 
     echo "[*]====================================================[*]"
     echo "[*]               Welcome to HIVE Shell                [*]"
@@ -19,8 +21,8 @@
     else
         mkdir NewShell
     fi
-    cur=$(pwd)
     cd NewShell
+    cur=$(pwd)  
 
     if test -d CrosItems; then
         echo
@@ -45,8 +47,14 @@ sleep 1
             echo "[*]                Build. BETA 0.0.2                   [*]"
             echo "[*]====================================================[*]"
         # True Check
-            read -p "Enter Your Username> " userCheck
-            user=$userCheck
+            if test -e username.txt; then
+                user=$(cat username.txt)
+            else
+                read -p "Enter Your Username> " userCheck
+                user=$userCheck
+                touch username.txt
+                echo "$userCheck" > username.txt
+            fi
         # Drop Shell
 
             #Reprint
@@ -89,6 +97,7 @@ sleep 1
             echo -n "Enter Your new username> "
             read NewUserName
             user=$NewUserName
+            echo $NewUserName > $cur/username.txt
         }
         printName() {
             echo $user
@@ -99,6 +108,7 @@ sleep 1
            echo "womp womp"
         }
         aboutCommand() {
+            echo
             echo "HIVE Sub-Shell"
             echo ""
             echo "Made By Wave Demure"
@@ -109,6 +119,11 @@ sleep 1
             read -p "Input Directory > " directorymaybe
             if test -d $directorymaybe; then
                 cd $directorymaybe
+                if [[ $directorymaybe == "" ]]; then
+                    fullpath=$(readlink -f /home/$(whoami))
+                else
+                    fullpath=$(readlink -f $directorymaybe)
+                fi
             else
                 echo "Thats not a Directory"
             fi
@@ -121,43 +136,12 @@ sleep 1
                 echo "Not a file lol"
             fi
         }
-        checkpack() {
-            isGit=$(which git)
-            isWget=$(which wget)
-            isCgpt=$(which cgpt)
-
-            if [[ $isGit != "" ]]; then
-                echo "Git is installed"
-            fi
-
-            if [[ $isWget != "" ]]; then
-                echo "wget is installed"
-            fi
-
-            if [[ $isCgpt != "" ]]; then
-                echo "cgpt is installed"
-            fi
-
-
-            if [[ $isCgpt != "" && $isGit != "" && $isWget != "" ]]; then
-                echo "All Packages Installed"
-            else
-                echo "You need to install"
-                if [[ $isGit == "" ]]; then
-                    echo "Git"
-                fi
-
-                if [[ $isWget == "" ]]; then
-                    echo "wget"
-                fi
-
-                if [[ $isCgpt == "" ]]; then
-                    echo "cgpt"
-                fi
-            fi
-        }
         creatingshim() {
             exec shelltools/builder.sh
+        }
+        createfile() {
+            read -p "Input File name> " filetp
+            touch $filetp
         }
         echonew() {
             removecho=("echo")
@@ -182,11 +166,50 @@ sleep 1
             remove_word "$commandInput" "$removecho"
 
         }
+
+        entertest() {
+            runcmd() {
+                eval $testcmd
+                if [ $? -eq 0 ]; then
+                    test
+                else
+                    clear
+                    echo "Command failed"
+                fi
+            }
+            if [[ $flushhelpshown == "" ]]; then
+                echo "welcome to the flush shell"
+                echo
+                echo "most commands will work here"
+                echo
+                echo "exit to leave flush"
+                echo
+                flushhelpshown="funny"
+            fi
+            read -p "flush> " testcmd
+            
+            case $testcmd in
+                exit) flushhelpshown=""; return;;
+                forceexit) echo "Exiting HIVE..."; sleep 2; echo "Thanks for using HIVE"; echo "Made By Wave Demure"; exit;;
+                *) runcmd ;;
+            esac
+            entertest
+        }
+        flush() {
+            echo "flush - a cmd manager for HIVE"
+            echo
+            echo "flush sh - enter shell with most normal bash commands"
+            echo "more will be added soon"
+        }
+        flux() {
+            cd $homedir
+            gnome-terminal -- bash -c 'exec ./FakeShell.sh'
+        }
         if [[ $helpShown == "" ]]; then
             helpText
             helpShown="sil"
         fi
-        echo -n -e "\033[0;31m$user\033[0m@\033[0;31mHIVE\033[0m ~ \033[0;32m$directorymaybe\033[0m >\033[0m "
+        echo -n -e "\033[0;31m$user\033[0m@\033[0;31mHIVE\033[0m ~ \033[0;32m$fullpath\033[0m >\033[0m "
         read commandInput
 
         # Send Command Trough Check
@@ -202,7 +225,11 @@ sleep 1
             list | ls) ls ;;
             cd) changeDir ;;
             exec) execute;;
+            deleteuser) rm -f $cur/username.txt; echo "Deleted user $user"; ;;
+            "flush sh") entertest ;;
+            flush) flush;;
             echo*) echonew ;;
+            flux) flux;;
             *) echo "$commandInput Is an Unknown Command";;
         esac
 
