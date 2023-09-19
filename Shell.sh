@@ -76,6 +76,7 @@ sleep 1
     shell() {
 
         help() {
+            echo "-----------------------------HELP-------------------------------"
             echo "These are the commands that you can use"
             echo "help  -  Shows a Help Screen"
             echo "clear - Clears the Sub-Shell"
@@ -84,6 +85,11 @@ sleep 1
             echo "resetshell/reset/reload - restart the shell"
             echo "whoami/user - displays the username"
             echo "buildshim - Opens the HIVE Shim Builder"
+            echo "flux - debugging terminal"
+            echo "flush - cmd manager"
+            echo "flush sh - shell with most commands"
+            echo "deleteuser - deletes the current user"
+            echo "----------------------------------------------------------------"
         }
         helpText() {
             echo "Welcome to the HIVE Shell, $user"
@@ -170,12 +176,6 @@ sleep 1
         entertest() {
             runcmd() {
                 eval $testcmd
-                if [ $? -eq 0 ]; then
-                    test
-                else
-                    clear
-                    echo "Command failed"
-                fi
             }
             if [[ $flushhelpshown == "" ]]; then
                 echo "welcome to the flush shell"
@@ -225,7 +225,7 @@ sleep 1
             list | ls) ls ;;
             cd) changeDir ;;
             exec) execute;;
-            deleteuser) rm -f $cur/username.txt; echo "Deleted user $user"; ;;
+            deleteuser) rm -f $cur/username.txt; echo "Deleted user $user";  ;;
             "flush sh") entertest ;;
             flush) flush;;
             echo*) echonew ;;
