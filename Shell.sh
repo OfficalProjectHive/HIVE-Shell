@@ -4,7 +4,7 @@
     crosDir=$cur/CrosItems
     user=
     helpShown=
-    flushhelpshown=
+    buzzhelpshown=
 
     echo "[*]====================================================[*]"
     echo "[*]               Welcome to HIVE Shell                [*]"
@@ -78,6 +78,7 @@ sleep 1
         help() {
             echo "-----------------------------HELP-------------------------------"
             echo "These are the commands that you can use"
+            echo
             echo "help  -  Shows a Help Screen"
             echo "clear - Clears the Sub-Shell"
             echo "exit/quit/close - Closes the Sub-Shell"
@@ -86,8 +87,8 @@ sleep 1
             echo "whoami/user - displays the username"
             echo "buildshim - Opens the HIVE Shim Builder"
             echo "flux - debugging terminal"
-            echo "flush - cmd manager"
-            echo "flush sh - shell with most commands"
+            echo "buzz - cmd manager"
+            echo "buzz sh - shell with most commands"
             echo "deleteuser - deletes the current user"
             echo "----------------------------------------------------------------"
         }
@@ -149,57 +150,42 @@ sleep 1
             read -p "Input File name> " filetp
             touch $filetp
         }
-        echonew() {
-            removecho=("echo")
 
-            remove_word() (
-                set -f
-                IFS=' '
-
-                s=$1
-                w=$2
-
-                set -- $1
-                for arg do
-                    shift
-                    [ "$arg" = "$w" ] && continue
-                    set -- "$@" "$arg"
-                done
-
-                printf '%s\n' "$*"
-            )
-
-            remove_word "$commandInput" "$removecho"
-
-        }
-
-        entertest() {
+        buzzshell() {
             runcmd() {
                 eval $testcmd
             }
-            if [[ $flushhelpshown == "" ]]; then
-                echo "welcome to the flush shell"
+            if [[ $buzzhelpshown == "" ]]; then
+                echo "welcome to the buzz shell"
                 echo
                 echo "most commands will work here"
                 echo
-                echo "exit to leave flush"
+                echo "exit to leave buzz"
                 echo
-                flushhelpshown="funny"
+                buzzhelpshown="funny"
             fi
-            read -p "flush> " testcmd
+            read -p "buzz> " testcmd
             
             case $testcmd in
-                exit) flushhelpshown=""; return;;
+                exit) buzzhelpshown=""; return;;
                 forceexit) echo "Exiting HIVE..."; sleep 2; echo "Thanks for using HIVE"; echo "Made By Wave Demure"; exit;;
                 *) runcmd ;;
             esac
-            entertest
+            buzzshell
         }
-        flush() {
-            echo "flush - a cmd manager for HIVE"
-            echo
-            echo "flush sh - enter shell with most normal bash commands"
-            echo "more will be added soon"
+        buzz() {
+            buzzhelptest() {
+                echo "buzz - a cmd manager for HIVE"
+                echo
+                echo "buzz sh - enter shell with most normal bash commands"
+                echo
+                echo "more will be added soon"
+            }
+            
+            case $commandInput in
+                buzz) buzzhelptest ;;
+                "buzz sh") buzzshell ;;
+            esac
         }
         flux() {
             cd $homedir
@@ -226,10 +212,10 @@ sleep 1
             cd) changeDir ;;
             exec) execute;;
             deleteuser) rm -f $cur/username.txt; echo "Deleted user $user";  ;;
-            "flush sh") entertest ;;
-            flush) flush;;
-            echo*) echonew ;;
+            buzz*) buzz;;
+            echo*) eval $commandInput ;;
             flux) flux;;
+            "") ;;
             *) echo "$commandInput Is an Unknown Command";;
         esac
 
