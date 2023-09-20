@@ -46,5 +46,7 @@ if you get a error that looks somewhat like this<br>
 #  eval: line 156: unexpected EOF while looking for matching `"'
 # or
 #  eval: line 157: syntax error: unexpected end of file
+# or
+# line 156: [cmd]: command not found
 ```
 <br> This is not an error with the script this is a error with your script
