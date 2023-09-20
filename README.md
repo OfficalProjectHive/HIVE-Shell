@@ -41,7 +41,7 @@ case $commandInput in
 
 # buzz shell error
 
-if you get a error about that looks like this<br>
+if you get a error that looks somewhat like this<br>
 ```bash
 #  eval: line 156: unexpected EOF while looking for matching `"'
 # or
