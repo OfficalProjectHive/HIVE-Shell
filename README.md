@@ -36,3 +36,15 @@ case $commandInput in
             *) echo "$commandInput Is an Unknown Command";;
         esac
 ```
+
+# FAQ
+
+# buzz shell error
+
+if you get a error about that looks like this<br>
+```bash
+  eval: line 156: unexpected EOF while looking for matching `"'
+# or
+  eval: line 157: syntax error: unexpected end of file
+```
+<br> This is not an error with the script this is a error with your script
