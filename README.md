@@ -43,8 +43,8 @@ case $commandInput in
 
 if you get a error about that looks like this<br>
 ```bash
-  eval: line 156: unexpected EOF while looking for matching `"'
+#  eval: line 156: unexpected EOF while looking for matching `"'
 # or
-  eval: line 157: syntax error: unexpected end of file
+#  eval: line 157: syntax error: unexpected end of file
 ```
 <br> This is not an error with the script this is a error with your script
