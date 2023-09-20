@@ -28,11 +28,11 @@ case $commandInput in
             list | ls) ls ;;
             cd) changeDir ;;
             exec) execute;;
-            deleteuser) rm -f $cur/username.txt; echo "Deleted user $user"; ;;
-            "flush sh") entertest ;;
-            flush) flush;;
-            echo*) echonew ;;
+            deleteuser) rm -f $cur/username.txt; echo "Deleted user $user";  ;;
+            buzz*) buzz;;
+            echo*) eval $commandInput ;;
             flux) flux;;
+            "") ;;
             *) echo "$commandInput Is an Unknown Command";;
         esac
 ```
