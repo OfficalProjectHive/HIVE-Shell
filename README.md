@@ -13,7 +13,7 @@
   sudo bash Shell.sh
 ```
 
-build Version BETA 0.0.1
+build Version 1.0.0
 
 # Current Commands
 ```bash
