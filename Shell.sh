@@ -1,3 +1,7 @@
+    clear
+    echo "Welcome to Groove" 
+    echo "The Hive Pre installer"
+    sleep 3
     cur=$(pwd)
     homedir=$cur
     directorymaybe=$cur
@@ -5,7 +9,7 @@
     user=
     helpShown=
     buzzhelpshown=
-
+    clear
     echo "[*]====================================================[*]"
     echo "[*]               Welcome to HIVE Shell                [*]"
     echo "[*]                                                    [*]"
